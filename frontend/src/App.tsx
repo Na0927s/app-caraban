@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import AuthPage from './pages/AuthPage';
+import RegisterCaravanPage from './pages/RegisterCaravanPage';
+import CaravanDetailPage from './pages/CaravanDetailPage';
+import MyPage from './pages/MyPage';
 
 function App() {
-  const [count, setCount] = useState(0);
   const [backendMessage, setBackendMessage] = useState('');
   const [error, setError] = useState('');
 
@@ -25,36 +28,35 @@ function App() {
   };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
+    <div className="min-h-screen bg-gray-100">
+      <Navbar />
+      <main className="container mx-auto p-4">
+        {/* 기존 Vite + React 시작 화면 내용은 제거 */}
+        
+        {/* 백엔드 API 테스트 섹션 유지 */}
+        <div className="backend-test-section mb-8 p-4 bg-white shadow rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Backend API Test</h2>
+          <button
+            onClick={fetchBackend}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Fetch Backend /api/hello
+          </button>
+          {backendMessage && <p className="mt-2 text-green-600">Backend says: <strong>{backendMessage}</strong></p>}
+          {error && <p className="mt-2 text-red-600">Error: {error}</p>}
+        </div>
 
-      <div className="backend-test-section">
-        <h2>Backend API Test</h2>
-        <button onClick={fetchBackend}>Fetch Backend /api/hello</button>
-        {backendMessage && <p>Backend says: <strong>{backendMessage}</strong></p>}
-        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      </div>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+        <Routes>
+          <Route path="/" element={<h1 className="text-3xl font-bold text-center">환영합니다! Caravan 공유 앱입니다.</h1>} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/register-caravan" element={<RegisterCaravanPage />} />
+          <Route path="/caravan/:id" element={<CaravanDetailPage />} />
+          <Route path="/my-page" element={<MyPage />} />
+          {/* 404 Not Found 페이지도 추가 가능 */}
+          <Route path="*" element={<h1 className="text-3xl font-bold text-center text-red-500">404 - 페이지를 찾을 수 없습니다.</h1>} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
