@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: caravan-app
+    # 포트 매핑 (예시, 필요에 따라 변경)
+    # ports:
+    #   - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    command: npm run start:dev # 개발 중에는 ts-node-dev 등을 사용할 수 있도록
