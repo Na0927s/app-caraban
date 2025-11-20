@@ -7,9 +7,11 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-xl font-bold">Caravan Share</Link>
         <ul className="flex space-x-4">
-          <li><Link to="/auth" className="hover:text-gray-300">로그인/회원가입</Link></li>
+          <li><Link to="/login" className="hover:text-gray-300">로그인</Link></li>
+          <li><Link to="/register" className="hover:text-gray-300">회원가입</Link></li>
           <li><Link to="/register-caravan" className="hover:text-gray-300">카라반 등록</Link></li>
-          <li><Link to="/caravan/123" className="hover:text-gray-300">카라반 상세 (예시)</Link></li>
+          <li><Link to="/caravans/123" className="hover:text-gray-300">카라반 상세 (예시)</Link></li>
+          <li><Link to="/host/dashboard" className="hover:text-gray-300">호스트 대시보드</Link></li>
           <li><Link to="/my-page" className="hover:text-gray-300">마이페이지</Link></li>
         </ul>
       </div>
